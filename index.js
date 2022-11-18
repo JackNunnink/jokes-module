@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export default function getRandom() {
-    joke = [];
+const getRandom = () => {
+    let joke = null;
 
-    x = (Math.floor(Math.random() * 2) == 0);
+    const x = (Math.floor(Math.random() * 2) == 0);
     
     if (x) {
         axios.get('https://official-joke-api.appspot.com/random_joke')
@@ -13,15 +13,17 @@ export default function getRandom() {
             .catch(err => {
                 console.log(err)
             })
-    } else {
-        axios.get('https://official-joke-api.appspot.com/jokes/random')
-            .then(res => {
-                joke = res.data
-            })
-            .catch(err => {
-                console.log(err)
-            })
     }
+
+    axios.get('https://official-joke-api.appspot.com/jokes/random')
+        .then(res => {
+            joke = res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
 
     return joke;
 }
+
+export default getRandom;
