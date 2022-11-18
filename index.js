@@ -1,27 +1,17 @@
 import axios from "axios";
 
-const getRandom = () => {
+const getRandom = async () => {
     let joke = null;
 
     const x = (Math.floor(Math.random() * 2) == 0);
     
     if (x) {
-        axios.get('https://official-joke-api.appspot.com/random_joke')
-            .then(res => {
-                joke = res.data
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        const res = await axios.get('https://official-joke-api.appspot.com/random_joke');
+        joke = res.data;
     }
 
-    axios.get('https://official-joke-api.appspot.com/jokes/random')
-        .then(res => {
-            joke = res.data
-        })
-        .catch(err => {
-            console.log(err)
-        })
+    const res = await axios.get('https://official-joke-api.appspot.com/jokes/random');
+    joke = res.data;
 
     return joke;
 }
